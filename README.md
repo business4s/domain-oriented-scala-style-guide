@@ -8,6 +8,9 @@ What you will find here is a collection of hints and advises how to write your c
 the business domain and problems being solved rather than technical aspects of it. Most of the points are opinionated
 and hence highly questionable. Use your own experience and judgment to decide which advice to follow.
 
+> [!NOTE]
+> This document is new and minimal. Please help to make it better, contributions are much welcomed!
+
 <!-- TOC -->
 * [Domain-oriented Scala Style Guide](#domain-oriented-scala-style-guide)
 * [Rules](#rules)
@@ -18,7 +21,7 @@ and hence highly questionable. Use your own experience and judgment to decide wh
     * [Don't use monad transformers in business interfaces](#dont-use-monad-transformers-in-business-interfaces)
   * [Define interfaces explicitly](#define-interfaces-explicitly)
   * [Express business logic through well-formatted for-comprehensions](#express-business-logic-through-well-formatted-for-comprehensions)
-  * [Use suffix operator to highlight important bits over technical type adjustments](#use-suffix-operator-to-highlight-important-bits-over-technical-type-adjustments)
+  * [Use suffix operators to highlight important bits over technical type adjustments](#use-suffix-operators-to-highlight-important-bits-over-technical-type-adjustments)
 <!-- TOC -->
 
 # Rules
@@ -186,7 +189,7 @@ for {
 
 ```
 
-## Use suffix operator to highlight important bits over technical type adjustments
+## Use suffix operators to highlight important bits over technical type adjustments
 
 Code is read from left to right, and line should begin with the most important information. If the types need to be 
 adjusted in particular context use suffix operators (e.g., from cats syntax) or `pipe` method from the standard library. 
