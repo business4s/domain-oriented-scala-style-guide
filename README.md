@@ -9,18 +9,16 @@ the business domain and problems being solved rather than technical aspects of i
 and hence highly questionable. Use your own experience and judgment to decide which advice to follow.
 
 <!-- TOC -->
-
 * [Domain-oriented Scala Style Guide](#domain-oriented-scala-style-guide)
 * [Rules](#rules)
-    * [Organise code based on domains, not technical layers](#organise-code-based-on-domains-not-technical-layers)
-    * [Model your domain.](#model-your-domain)
-    * [Separate domain problem from technical solution](#separate-domain-problem-from-technical-solution)
-        * [Don't use FP primitives in the business interfaces](#dont-use-fp-primitives-in-the-business-interfaces)
-        * [Don't use monad transformers in business interfaces](#dont-use-monad-transformers-in-business-interfaces)
-    * [Define interfaces explicitly](#define-interfaces-explicitly)
-    * [Default to well formatted for-comprehensions](#default-to-well-formatted-for-comprehensions)
-    * [Use suffix operator to prioritise logic over technical type adjustements](#use-suffix-operator-to-prioritise-logic-over-technical-type-adjustements)
-
+  * [Organise code based on domains, not technical layers](#organise-code-based-on-domains-not-technical-layers)
+  * [Model your domain](#model-your-domain)
+  * [Separate domain problem from technical solution](#separate-domain-problem-from-technical-solution)
+    * [Don't use FP primitives in the business interfaces](#dont-use-fp-primitives-in-the-business-interfaces)
+    * [Don't use monad transformers in business interfaces](#dont-use-monad-transformers-in-business-interfaces)
+  * [Define interfaces explicitly](#define-interfaces-explicitly)
+  * [Express business logic through well-formatted for-comprehensions](#express-business-logic-through-well-formatted-for-comprehensions)
+  * [Use suffix operator to highlight important bits over technical type adjustments](#use-suffix-operator-to-highlight-important-bits-over-technical-type-adjustments)
 <!-- TOC -->
 
 # Rules
@@ -55,7 +53,7 @@ example/
 `String` is not a domain concept. Avoid using simple types in your domain model. Instead, try to name them, especially
 if they are used in a standalone way. Select a typesafety level and modeling approach that you're comfortable with: type
 aliases, [opaque types](https://docs.scala-lang.org/scala3/book/types-opaque-types.html), case class wrappers,
-[newtypes](https://github.com/estatico/scala-newtype).
+[new-types](https://github.com/estatico/scala-newtype).
 
 ```scala 3
 // Wrong!
@@ -190,8 +188,8 @@ for {
 
 ## Use suffix operator to highlight important bits over technical type adjustments
 
-Core is read from left to right, and line should begin with the most important information. If the types need to be 
-adjusted in particular context use suffix oeprators (e.g. from cats syntax) or `pipe` method from the standard library. 
+Code is read from left to right, and line should begin with the most important information. If the types need to be 
+adjusted in particular context use suffix operators (e.g., from cats syntax) or `pipe` method from the standard library. 
 
 ```scala 3
 // Wrong!
