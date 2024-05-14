@@ -2,15 +2,16 @@
 
 What you will find below is not a typical style guide. If you're looking for a general resource of this kind, consider
 the official [Scala Style Guide](https://docs.scala-lang.org/style/) or the
-great [Scala Best Practices](https://github.com/alexandru/scala-best-practices) collection
+great [Scala Best Practices](https://github.com/alexandru/scala-best-practices) collection.
 
-What you will find here is a collection of hints and advises how to write your code in a way that brings the focus to
+What you will find here is a collection of hints and advises on how to write your code in a way that brings the focus to
 the business domain and problems being solved rather than technical aspects of it. Most of the points are opinionated
-and hence highly questionable. Use your own experience and judgment to decide which advice to follow.
+and hence highly questionable. **Use your own experience and judgment to decide which advice to follow.**
 
 > [!NOTE]
 > This document is new and minimal. Please help to make it better, contributions are much welcomed!
 
+**Table of Contents**
 <!-- TOC -->
 * [Domain-oriented Scala Style Guide](#domain-oriented-scala-style-guide)
 * [Rules](#rules)
@@ -28,7 +29,7 @@ and hence highly questionable. Use your own experience and judgment to decide wh
 
 ## Organise code based on domains, not technical layers
 
-Both ways are fine from the general standpoint, but one of them is better if we want to prioritize thinking about
+Both ways are fine from the general standpoint, but one of them is better if we want to prioritize thinking about the
 business domain.
 
 ```
@@ -90,7 +91,8 @@ repository.updateAccountBalance()
 
 ### Don't use FP primitives in the business interfaces
 
-Monoid is typically not a business-domain concept.
+Monoid is typically not a business-domain concept. While domain objects might form certain algebraic structures, this
+should be an implementation detail, not a first-class property.
 
 ```scala 3
 // Wrong
@@ -117,7 +119,7 @@ class ProfitTaxCalculator extends TaxCalculator[Profit]
 ### Don't use monad transformers in business interfaces
 
 Monad transformers are isomorphic to the underlying structure and bring only practical benefits but no conceptual
-difference.
+difference. Keep the signatures as simple as possible.
 
 ```scala 3
 // Wrong!
@@ -134,7 +136,8 @@ trait NotificationService {
 ## Define interfaces explicitly
 
 All core business logic should be exposed through interfaces, even if there is exactly one implementation. The goal of
-this is to make the interface explicit and bring focus to it. This applies also to static methods with no
+this is to make the interface explicit and bring focus to it. Such an interface can then be understood on its own and
+analyzed for coherence or distance from the business domain. This applies also to static methods with no
 dependencies (`object`s).
 
 ```scala 3
@@ -181,9 +184,9 @@ for {
 
 // Right!
 for {
-  _             <- validate()
+  _ <- validate()
   transactionId <- execut()
-  _             <- notify(transactionId)
+  _ <- notify(transactionId)
 } yield ()
 
 
@@ -191,8 +194,8 @@ for {
 
 ## Use suffix operators to highlight important bits over technical type adjustments
 
-Code is read from left to right, and line should begin with the most important information. If the types need to be 
-adjusted in particular context use suffix operators (e.g., from cats syntax) or `pipe` method from the standard library. 
+Code is read from left to right, and line should begin with the most important information. If the types need to be
+adjusted in particular context use suffix operators (e.g., from cats syntax) or `pipe` method from the standard library.
 
 ```scala 3
 // Wrong!
