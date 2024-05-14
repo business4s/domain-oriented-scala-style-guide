@@ -13,16 +13,18 @@ and hence highly questionable. **Use your own experience and judgment to decide 
 
 **Table of Contents**
 <!-- TOC -->
+
 * [Domain-oriented Scala Style Guide](#domain-oriented-scala-style-guide)
 * [Rules](#rules)
-  * [Organise code based on domains, not technical layers](#organise-code-based-on-domains-not-technical-layers)
-  * [Model your domain](#model-your-domain)
-  * [Separate domain problem from technical solution](#separate-domain-problem-from-technical-solution)
-    * [Don't use FP primitives in the business interfaces](#dont-use-fp-primitives-in-the-business-interfaces)
-    * [Don't use monad transformers in business interfaces](#dont-use-monad-transformers-in-business-interfaces)
-  * [Define interfaces explicitly](#define-interfaces-explicitly)
-  * [Express business logic through well-formatted for-comprehensions](#express-business-logic-through-well-formatted-for-comprehensions)
-  * [Use suffix operators to highlight important bits over technical type adjustments](#use-suffix-operators-to-highlight-important-bits-over-technical-type-adjustments)
+    * [Organise code based on domains, not technical layers](#organise-code-based-on-domains-not-technical-layers)
+    * [Model your domain](#model-your-domain)
+    * [Separate domain problem from technical solution](#separate-domain-problem-from-technical-solution)
+        * [Don't use FP primitives in the business interfaces](#dont-use-fp-primitives-in-the-business-interfaces)
+        * [Don't use monad transformers in business interfaces](#dont-use-monad-transformers-in-business-interfaces)
+    * [Define interfaces explicitly](#define-interfaces-explicitly)
+    * [Express business logic through well-formatted for-comprehensions](#express-business-logic-through-well-formatted-for-comprehensions)
+    * [Use suffix operators to highlight important bits over technical type adjustments](#use-suffix-operators-to-highlight-important-bits-over-technical-type-adjustments)
+
 <!-- TOC -->
 
 # Rules
@@ -116,6 +118,14 @@ trait TaxCalculator[T] {
 class ProfitTaxCalculator extends TaxCalculator[Profit]
 ```
 
+### What about `IO`?
+
+It's also an FP concept that often leaks into the domain interfaces. Should we try to eliminate it as well?
+
+We could try, but this becomes rather difficult or costly in practice. One of the ways to do it to parametrize
+interfaces by `F[_]` but it comes with its own tradeoffs. So instead, let's stay pragmatic and allow IO as a special
+case.
+
 ### Don't use monad transformers in business interfaces
 
 Monad transformers are isomorphic to the underlying structure and bring only practical benefits but no conceptual
@@ -184,9 +194,9 @@ for {
 
 // Right!
 for {
-  _ <- validate()
-  transactionId <- execut()
-  _ <- notify(transactionId)
+  _             <- validate()
+  transactionId <- execute()
+  _             <- notify(transactionId)
 } yield ()
 
 
