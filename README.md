@@ -1,4 +1,4 @@
-# Domain-oriented Scala Style Guide
+# Domain-Oriented Scala Style Guide
 
 What you will find below is not a typical style guide. If you're looking for a general resource of this kind, consider
 the official [Scala Style Guide](https://docs.scala-lang.org/style/) or the
