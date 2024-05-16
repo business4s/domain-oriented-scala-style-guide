@@ -1,4 +1,5 @@
 # Domain-Oriented Scala Style Guide
+![Discord](https://img.shields.io/discord/1240565362601230367?style=flat-square&logo=discord&link=https%3A%2F%2Fbit.ly%2Fbusiness4s-discord)
 
 What you will find below is not a typical style guide. If you're looking for a general resource of this kind, consider
 the official [Scala Style Guide](https://docs.scala-lang.org/style/) or the
