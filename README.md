@@ -5,7 +5,7 @@ What you will find below is not a typical style guide. If you're looking for a g
 the official [Scala Style Guide](https://docs.scala-lang.org/style/) or the
 great [Scala Best Practices](https://github.com/alexandru/scala-best-practices) collection.
 
-What you will find here is a collection of hints and advises on how to write your code in a way that brings the focus to
+What you will find here is a collection of hints and advice on how to write your code in a way that brings the focus to
 the business domain and problems being solved rather than technical aspects of it. Most of the points are opinionated
 and hence highly questionable. **Use your own experience and judgment to decide which advice to follow.**
 
